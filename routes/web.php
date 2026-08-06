@@ -18,6 +18,11 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
+    // Ticket Routes
+    Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
+    Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+    Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
+
     // Admin Only Routes
     Route::middleware(['role:Admin'])->group(function () {
         Route::get('/admin/test', function () {
