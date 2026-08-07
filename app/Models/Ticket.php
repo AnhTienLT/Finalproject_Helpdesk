@@ -7,16 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $fillable = [
+<<<<<<< HEAD
         'title', 'description', 'status',
         'user_id', 'assigned_to', 'category_id', 'priority_id', 'room_id',
     ];
 
     public function creator()
+=======
+        'title',
+        'description',
+        'status',
+        'user_id',
+        'assigned_to',
+        'category_id',
+        'priority_id',
+        'room_id',
+    ];
+
+    public function user()
+>>>>>>> 54a89ad30240b3de97b5a935a2ac40ac51a63455
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
+<<<<<<< HEAD
     public function assignee()
+=======
+    public function assignedTo()
+>>>>>>> 54a89ad30240b3de97b5a935a2ac40ac51a63455
     {
         return $this->belongsTo(User::class, 'assigned_to');
     }
