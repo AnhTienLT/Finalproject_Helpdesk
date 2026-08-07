@@ -1,9 +1,15 @@
 <?php
 
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TicketController;
 
+<<<<<<< HEAD
+Route::get('/', fn () => redirect()->route('rooms.index'));
+
+Route::resource('rooms', RoomController::class);
+=======
 Route::get('/', function () {
     return redirect('/login');
 });
@@ -38,3 +44,4 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
+>>>>>>> 54a89ad30240b3de97b5a935a2ac40ac51a63455

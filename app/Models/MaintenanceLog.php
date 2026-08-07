@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class MaintenanceLog extends Model
 {
+<<<<<<< HEAD
+    protected $fillable = ['asset_id', 'performed_by', 'description', 'maintenance_date', 'cost'];
+=======
     protected $fillable = [
         'asset_id',
         'performed_by',
@@ -13,6 +16,7 @@ class MaintenanceLog extends Model
         'maintenance_date',
         'cost',
     ];
+>>>>>>> 54a89ad30240b3de97b5a935a2ac40ac51a63455
 
     public function asset()
     {
