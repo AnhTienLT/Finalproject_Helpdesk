@@ -7,23 +7,35 @@
     <h1 class="text-3xl font-bold mb-6 text-gray-800">Bảng điều khiển (Demo 1)</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Thông tin User -->
+        <!-- Thống kê hệ thống -->
         <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
-            <h2 class="text-xl font-semibold text-blue-800 mb-4">Thông tin cá nhân</h2>
-            <p><strong>Họ tên:</strong> {{ Auth::user()->name }}</p>
-            <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-            <p><strong>Vai trò:</strong> {{ Auth::user()->role->name }}</p>
-            <p><strong>Phòng ban:</strong> {{ Auth::user()->department->name }}</p>
+            <h2 class="text-xl font-semibold text-blue-800 mb-4">Thống kê hệ thống</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <p class="text-sm text-gray-600">Người dùng</p>
+                    <p class="text-2xl font-bold">{{ $stats['users_count'] }}</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Phòng ban</p>
+                    <p class="text-2xl font-bold">{{ $stats['departments_count'] }}</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Yêu cầu (Ticket)</p>
+                    <p class="text-2xl font-bold">{{ $stats['tickets_count'] }}</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600">Tài sản</p>
+                    <p class="text-2xl font-bold">{{ $stats['assets_count'] }}</p>
+                </div>
+            </div>
         </div>
 
-        <!-- Chức năng Demo -->
+        <!-- Thông tin cá nhân -->
         <div class="bg-green-50 p-6 rounded-lg border border-green-200">
-            <h2 class="text-xl font-semibold text-green-800 mb-4">Chức năng hệ thống</h2>
-            <ul class="list-disc ml-5 space-y-2">
-                <li>Gửi yêu cầu hỗ trợ (Ticket)</li>
-                <li>Quản lý tài sản (Assets)</li>
-                <li>Theo dõi bảo trì</li>
-            </ul>
+            <h2 class="text-xl font-semibold text-green-800 mb-4">Thông tin cá nhân</h2>
+            <p><strong>Họ tên:</strong> {{ Auth::user()->name }}</p>
+            <p><strong>Vai trò:</strong> {{ Auth::user()->role->name ?? 'N/A' }}</p>
+            <p><strong>Phòng ban:</strong> {{ Auth::user()->department->name ?? 'N/A' }}</p>
         </div>
 
         <!-- Trạng thái Demo -->
