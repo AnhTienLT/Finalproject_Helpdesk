@@ -13,6 +13,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\AssetCategoryController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -45,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tickets', TicketController::class);
     Route::resource('assets', AssetController::class);
     Route::resource('rooms', RoomController::class);
+    Route::resource('asset-categories', AssetCategoryController::class);
 
     // Technician Only Routes
     Route::middleware(['role:Technician'])->group(function () {

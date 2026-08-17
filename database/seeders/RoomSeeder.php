@@ -17,6 +17,7 @@ class RoomSeeder extends Seeder
             ['name' => 'Phòng Kỹ thuật', 'location' => 'Tầng 2', 'description' => 'Khu vực làm việc IT'],
             ['name' => 'Phòng Giám đốc', 'location' => 'Tầng 3', 'description' => 'Văn phòng lãnh đạo'],
             ['name' => 'Sảnh chính', 'location' => 'Tầng G', 'description' => 'Khu vực tiếp khách'],
+            ['name' => 'Phòng Server', 'location' => 'Tầng 2', 'description' => 'Phòng máy chủ trung tâm'],
         ];
 
         foreach ($rooms as $room) {

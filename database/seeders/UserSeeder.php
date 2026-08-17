@@ -51,5 +51,25 @@ class UserSeeder extends Seeder
             'role_id' => $userRole->id,
             'department_id' => $hrDept->id,
         ]);
+
+        // Tạo thêm tài khoản Người dùng mẫu 2 (ID: 4)
+        User::create([
+            'name' => 'Le Van User 2',
+            'email' => 'user2@helpdesk.com',
+            'password' => Hash::make('password'),
+            'phone' => '0555666888',
+            'role_id' => $userRole->id,
+            'department_id' => $hrDept->id,
+        ]);
+
+        // Tạo thêm tài khoản Người dùng mẫu 3 (ID: 5)
+        User::create([
+            'name' => 'Pham Thi User 3',
+            'email' => 'user3@helpdesk.com',
+            'password' => Hash::make('password'),
+            'phone' => '0555666999',
+            'role_id' => $userRole->id,
+            'department_id' => $hrDept->id,
+        ]);
     }
 }
