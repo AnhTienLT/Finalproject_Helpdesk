@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TicketResponseController;
+use App\Http\Controllers\AssetController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -32,6 +33,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Ticket Response Routes
     Route::post('/tickets/{ticket}/responses', [TicketResponseController::class, 'store'])->name('responses.store');
+
+    // Asset Routes
+    Route::get('/assets', [AssetController::class, 'index'])->name('assets.index');
+    Route::get('/assets/{asset}', [AssetController::class, 'show'])->name('assets.show');
 
     // Admin Only Routes
     Route::middleware(['role:Admin'])->group(function () {

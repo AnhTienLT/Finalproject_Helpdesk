@@ -52,7 +52,8 @@
                 <div class="flex items-center space-x-6">
                     <div class="space-x-4">
                         <a href="{{ route('dashboard') }}" class="hover:text-blue-200">Dashboard</a>
-                        <a href="{{ route('tickets.index') }}" class="hover:text-blue-200">Yêu cầu của tôi</a>
+                        <a href="{{ route('tickets.index') }}" class="hover:text-blue-200">Yêu cầu</a>
+                        <a href="{{ route('assets.index') }}" class="hover:text-blue-200">Tài sản</a>
                     </div>
                     <div class="flex items-center space-x-4 border-l pl-6">
                         <span>Xin chào, <strong>{{ Auth::user()->name }}</strong></span>
