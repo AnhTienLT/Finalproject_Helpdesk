@@ -35,6 +35,12 @@
                             <a href="{{ route('assets.index') }}" class="{{ request()->routeIs('assets.*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                                 Tài sản
                             </a>
+                            <a href="{{ route('asset-categories.index') }}" class="{{ request()->routeIs('asset-categories.*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
+                                Danh mục tài sản
+                            </a>
+                            <a href="{{ route('maintenance-logs.index') }}" class="{{ request()->routeIs('maintenance-logs.*') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
+                                Nhật ký bảo trì
+                            </a>
                         </div>
                         @endauth
                     </div>
