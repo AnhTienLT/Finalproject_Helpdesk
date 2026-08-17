@@ -13,6 +13,8 @@ class TicketResponseController extends Controller
     {
         $validated = $request->validate([
             'message' => 'required',
+        ], [
+            'message.required' => 'Nội dung phản hồi không được để trống.',
         ]);
 
         TicketResponse::create([
@@ -27,5 +29,18 @@ class TicketResponseController extends Controller
         }
 
         return back()->with('success', 'Phản hồi đã được gửi.');
+    }
+
+    public function destroy(TicketResponse $response)
+    {
+        $user = Auth::user();
+
+        // Chỉ Admin hoặc chính người viết phản hồi mới có quyền xóa
+        if ($user->role->name === 'Admin' || $response->user_id === $user->id) {
+            $response->delete();
+            return back()->with('success', 'Đã xóa phản hồi thành công.');
+        }
+
+        return back()->with('error', 'Bạn không có quyền xóa phản hồi này.');
     }
 }

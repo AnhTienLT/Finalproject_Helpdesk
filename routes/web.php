@@ -50,6 +50,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('asset-categories', AssetCategoryController::class);
     Route::resource('maintenance-logs', MaintenanceLogController::class);
 
+    // Ticket Responses Routes
+    Route::post('tickets/{ticket}/responses', [TicketResponseController::class, 'store'])->name('responses.store');
+    Route::delete('responses/{response}', [TicketResponseController::class, 'destroy'])->name('responses.destroy');
+
     // Technician Only Routes
     Route::middleware(['role:Technician'])->group(function () {
         Route::get('/tech/test', function () {
