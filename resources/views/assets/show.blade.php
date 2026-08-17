@@ -9,14 +9,22 @@
             <h1 class="text-3xl font-bold text-gray-800">{{ $asset->name }}</h1>
             <p class="text-gray-500 mt-1">Mã tài sản: <span class="font-mono font-bold text-gray-700">{{ $asset->asset_code }}</span></p>
         </div>
-        <div class="text-right">
-            <span class="px-4 py-2 rounded-full text-sm font-bold text-white
-                {{ $asset->status === 'active' ? 'bg-green-600' : '' }}
-                {{ $asset->status === 'broken' ? 'bg-red-600' : '' }}
-                {{ $asset->status === 'maintenance' ? 'bg-yellow-600' : '' }}
-                {{ $asset->status === 'disposed' ? 'bg-gray-600' : '' }}
-            ">
-                {{ ucfirst($asset->status) }}
+            @php
+                $statusClasses = [
+                    'active' => 'bg-green-600',
+                    'broken' => 'bg-red-600',
+                    'maintenance' => 'bg-amber-600',
+                    'disposed' => 'bg-gray-600',
+                ];
+                $statusText = [
+                    'active' => 'Hoạt động',
+                    'broken' => 'Hỏng',
+                    'maintenance' => 'Bảo trì',
+                    'disposed' => 'Thanh lý',
+                ];
+            @endphp
+            <span class="px-4 py-2 rounded-full text-sm font-bold text-white {{ $statusClasses[$asset->status] ?? 'bg-gray-600' }}">
+                {{ $statusText[$asset->status] ?? ucfirst($asset->status) }}
             </span>
         </div>
     </div>

@@ -13,10 +13,9 @@
         </p>
     </div>
     <div class="mt-4 flex sm:mt-0 sm:ml-4">
-        {{-- Nút thêm tài sản (giả định route tồn tại) --}}
-        {{-- <a href="{{ route('assets.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition">
-            Thêm tài sản
-        </a> --}}
+        <a href="{{ route('assets.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition">
+            Thêm tài sản mới
+        </a>
     </div>
 </div>
 
@@ -82,10 +81,21 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="{{ route('assets.show', $asset->id) }}" class="text-indigo-600 hover:text-indigo-900 inline-flex items-center bg-indigo-50 px-3 py-1 rounded-md transition">
-                                    Chi tiết
-                                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                                </a>
+                                <div class="flex justify-end items-center space-x-3">
+                                    <a href="{{ route('assets.show', $asset->id) }}" class="text-indigo-600 hover:text-indigo-900 inline-flex items-center bg-indigo-50 px-2 py-1 rounded transition">
+                                        Chi tiết
+                                    </a>
+                                    <a href="{{ route('assets.edit', $asset->id) }}" class="text-amber-600 hover:text-amber-900 inline-flex items-center bg-amber-50 px-2 py-1 rounded transition">
+                                        Sửa
+                                    </a>
+                                    <form action="{{ route('assets.destroy', $asset->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa tài sản này?')" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-900 inline-flex items-center bg-red-50 px-2 py-1 rounded transition">
+                                            Xóa
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         @empty
@@ -100,5 +110,8 @@
             </div>
         </div>
     </div>
+</div>
+<div class="mt-6">
+    {{ $assets->links() }}
 </div>
 @endsection
