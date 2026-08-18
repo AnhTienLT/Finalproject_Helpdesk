@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         $itDept = Department::where('name', 'IT')->first() ?? Department::first();
         $hrDept = Department::where('name', 'HR')->first() ?? Department::first();
 
-        // Tạo tài khoản Admin
+        // 1. System Admin (ID: 1)
         User::create([
             'name' => 'System Admin',
             'email' => 'admin@helpdesk.com',
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'department_id' => $itDept->id,
         ]);
 
-        // Tạo tài khoản Kỹ thuật viên
+        // 2. Technician (ID: 2)
         User::create([
             'name' => 'Nguyen Van Tech',
             'email' => 'tech@helpdesk.com',
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             'department_id' => $itDept->id,
         ]);
 
-        // Tạo tài khoản Người dùng mẫu
+        // 3. User 1 (ID: 3)
         User::create([
             'name' => 'Tran Thi User',
             'email' => 'user@helpdesk.com',
@@ -51,5 +51,37 @@ class UserSeeder extends Seeder
             'role_id' => $userRole->id,
             'department_id' => $hrDept->id,
         ]);
+
+        // 4. User 2 (ID: 4) - Cần cho TicketSeeder
+        User::create([
+            'name' => 'Le Van Dao Tao',
+            'email' => 'daotao@helpdesk.com',
+            'password' => Hash::make('password'),
+            'phone' => '0444555666',
+            'role_id' => $userRole->id,
+            'department_id' => $hrDept->id,
+        ]);
+
+        // 5. User 3 (ID: 5) - Cần cho TicketSeeder
+        User::create([
+            'name' => 'Hoang Thi Ke Toan',
+            'email' => 'ketoan@helpdesk.com',
+            'password' => Hash::make('password'),
+            'phone' => '0333444555',
+            'role_id' => $userRole->id,
+            'department_id' => $hrDept->id,
+        ]);
+
+        // Tạo thêm 10 nhân viên để kiểm tra tính năng phân trang
+        for ($i = 1; $i <= 10; $i++) {
+            User::create([
+                'name' => "Nhân viên mẫu $i",
+                'email' => "user.test$i@helpdesk.com",
+                'password' => Hash::make('password'),
+                'phone' => '0900000' . str_pad($i, 3, '0', STR_PAD_LEFT),
+                'role_id' => $userRole->id,
+                'department_id' => $hrDept->id,
+            ]);
+        }
     }
 }
