@@ -17,12 +17,12 @@ class TicketController extends Controller
 
         // Nếu là Admin hoặc Tech, xem tất cả. Nếu là User, chỉ xem ticket của mình.
         if ($user->hasRole('Admin') || $user->hasRole('Technician')) {
-            $tickets = Ticket::with(['user', 'category', 'priority', 'assignedTo'])->latest()->get();
+            $tickets = Ticket::with(['user', 'category', 'priority', 'assignedTo'])->latest()->paginate(10);
         } else {
             $tickets = Ticket::where('user_id', $user->id)
                 ->with(['category', 'priority', 'assignedTo'])
                 ->latest()
-                ->get();
+                ->paginate(10);
         }
 
         return view('tickets.index', compact('tickets'));
