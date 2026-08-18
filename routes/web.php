@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('priorities', PriorityController::class);
         Route::resource('notifications', NotificationController::class);
+        Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 
         Route::get('/admin/test', function () {
             return "Chào Admin! Bạn có quyền truy cập vào trang quản trị này.";
@@ -43,6 +44,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Resource routes accessible by multiple roles
     Route::resource('tickets', TicketController::class);
+    Route::post('/tickets/{ticket}/assign', [TicketController::class, 'assignToMe'])->name('tickets.assign');
+    Route::patch('/tickets/{ticket}/status', [TicketController::class, 'updateStatus'])->name('tickets.updateStatus');
+    Route::post('/tickets/{ticket}/responses', [TicketResponseController::class, 'store'])->name('responses.store');
     Route::resource('assets', AssetController::class);
     Route::resource('rooms', RoomController::class);
 

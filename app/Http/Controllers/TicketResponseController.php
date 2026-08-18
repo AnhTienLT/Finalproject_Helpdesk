@@ -22,8 +22,15 @@ class TicketResponseController extends Controller
         ]);
 
         // Tự động chuyển trạng thái ticket sang in_progress nếu Tech hoặc Admin phản hồi
-        if (Auth::user()->role->name !== 'User' && $ticket->status === 'open') {
-            $ticket->update(['status' => 'in_progress']);
+        if (Auth::user()->hasRole('Technician') || Auth::user()->hasRole('Admin')) {
+            if ($ticket->status === 'open') {
+                $ticket->update(['status' => 'in_progress']);
+            }
+
+            // Nếu ticket chưa được gán, tự động gán cho Tech phản hồi đầu tiên
+            if (!$ticket->assigned_to) {
+                $ticket->update(['assigned_to' => Auth::id()]);
+            }
         }
 
         return back()->with('success', 'Phản hồi đã được gửi.');
