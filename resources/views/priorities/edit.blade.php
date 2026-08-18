@@ -3,46 +3,62 @@
 @section('title', 'Sửa Độ ưu tiên')
 
 @section('content')
-<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
-    <div class="flex items-center justify-between mb-6">
-        <h1 class="text-2xl font-bold">Chỉnh sửa Độ ưu tiên</h1>
-        <a href="{{ route('priorities.index') }}" class="text-gray-600 hover:text-gray-900">&larr; Quay lại</a>
+<div class="max-w-3xl mx-auto">
+    <div class="md:flex md:items-center md:justify-between mb-6">
+        <div class="flex-1 min-w-0">
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl">Chỉnh sửa độ ưu tiên</h2>
+            <p class="mt-1 text-sm text-gray-500">Cập nhật thông tin và màu sắc nhận diện cho mức độ ưu tiên.</p>
+        </div>
     </div>
 
-    <form action="{{ route('priorities.update', $priority) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="mb-4">
-            <label for="name" class="block text-gray-700 font-semibold mb-2">Tên hiển thị</label>
-            <input type="text" name="name" id="name" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('name') border-red-500 @enderror" value="{{ old('name', $priority->name) }}" required>
-            @error('name')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+    <div class="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
+        <form action="{{ route('priorities.update', $priority) }}" method="POST" class="divide-y divide-gray-200">
+            @csrf
+            @method('PUT')
+            <div class="p-6 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Tên hiển thị</label>
+                        <input type="text" name="name" id="name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2.5 border @error('name') border-red-500 @enderror" value="{{ old('name', $priority->name) }}" required>
+                        @error('name')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-        <div class="mb-4">
-            <label for="level" class="block text-gray-700 font-semibold mb-2">Cấp độ (Số)</label>
-            <input type="number" name="level" id="level" class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('level') border-red-500 @enderror" value="{{ old('level', $priority->level) }}" required>
-            <p class="text-gray-500 text-xs mt-1">Cấp độ cao hơn thường được ưu tiên hơn.</p>
-            @error('level')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+                    <div>
+                        <label for="level" class="block text-sm font-semibold text-gray-700 mb-2">Cấp độ (Số)</label>
+                        <input type="number" name="level" id="level" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2.5 border @error('level') border-red-500 @enderror" value="{{ old('level', $priority->level) }}" required>
+                        @error('level')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
 
-        <div class="mb-6">
-            <label for="color" class="block text-gray-700 font-semibold mb-2">Màu sắc (HEX)</label>
-            <div class="flex space-x-2">
-                <input type="color" name="color_picker" id="color_picker" class="h-10 w-20 border rounded cursor-pointer" value="{{ old('color', $priority->color) }}" oninput="document.getElementById('color').value = this.value">
-                <input type="text" name="color" id="color" class="flex-1 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('color') border-red-500 @enderror" value="{{ old('color', $priority->color) }}" required>
+                <div>
+                    <label for="color" class="block text-sm font-semibold text-gray-700 mb-2">Màu sắc nhận diện (Mã HEX)</label>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input type="color" id="color_picker" class="h-10 w-20 rounded-lg cursor-pointer border border-gray-200 shadow-sm" value="{{ old('color', $priority->color) }}" oninput="document.getElementById('color').value = this.value.toUpperCase()">
+                        </div>
+                        <div class="flex-1 max-w-xs">
+                            <input type="text" name="color" id="color" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2.5 border font-mono @error('color') border-red-500 @enderror" value="{{ old('color', $priority->color) }}" required>
+                        </div>
+                    </div>
+                    @error('color')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
-            @error('color')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
 
-        <div class="flex justify-end">
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded shadow transition">Cập nhật</button>
-        </div>
-    </form>
+            <div class="px-6 py-4 bg-gray-50 flex items-center justify-end space-x-3">
+                <a href="{{ route('priorities.index') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition">
+                    Hủy bỏ
+                </a>
+                <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition">
+                    Cập nhật
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 @endsection
