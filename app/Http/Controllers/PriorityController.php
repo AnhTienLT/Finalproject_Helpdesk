@@ -23,7 +23,9 @@ class PriorityController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:100|unique:priorities',
             'level' => 'required|integer',
-            'color' => 'required|max:20',
+            'color' => ['required', 'string', 'max:20', 'regex:/^#([0-9a-fA-F]{6})$/'],
+        ], [
+            'color.regex' => 'Màu sắc phải là mã hex 6 ký tự, ví dụ #ff0000.',
         ]);
 
         Priority::create($validated);
@@ -41,7 +43,9 @@ class PriorityController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:100|unique:priorities,name,' . $priority->id,
             'level' => 'required|integer',
-            'color' => 'required|max:20',
+            'color' => ['required', 'string', 'max:20', 'regex:/^#([0-9a-fA-F]{6})$/'],
+        ], [
+            'color.regex' => 'Màu sắc phải là mã hex 6 ký tự, ví dụ #ff0000.',
         ]);
 
         $priority->update($validated);

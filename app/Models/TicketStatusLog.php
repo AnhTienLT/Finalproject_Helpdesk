@@ -4,20 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Notification extends Model
+class TicketStatusLog extends Model
 {
     protected $fillable = [
+        'ticket_id',
         'user_id',
-        'title',
-        'message',
-        'link',
-        'type',
-        'is_read',
+        'from_status',
+        'to_status',
+        'note',
     ];
 
-    protected $casts = [
-        'is_read' => 'boolean',
-    ];
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class);
+    }
 
     public function user()
     {

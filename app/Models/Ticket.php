@@ -15,6 +15,14 @@ class Ticket extends Model
         'category_id',
         'priority_id',
         'room_id',
+        'resolution_note',
+        'resolved_at',
+        'closed_at',
+    ];
+
+    protected $casts = [
+        'resolved_at' => 'datetime',
+        'closed_at'   => 'datetime',
     ];
 
     public function user()
@@ -45,5 +53,10 @@ class Ticket extends Model
     public function responses()
     {
         return $this->hasMany(TicketResponse::class);
+    }
+
+    public function statusLogs()
+    {
+        return $this->hasMany(TicketStatusLog::class)->orderBy('created_at');
     }
 }

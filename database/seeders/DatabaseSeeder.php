@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             NotificationSeeder::class,
             TicketSeeder::class,
             TicketResponseSeeder::class,
+            TicketStatusLogSeeder::class,
             AssetSeeder::class,
             MaintenanceLogSeeder::class,
         ]);
